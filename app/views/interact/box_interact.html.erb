@@ -40,12 +40,7 @@ box interact
 .save_square {
 	margin-bottom: 5px;
 }
-/*.interact_square {
-	border-style: solid;
-  border-width: 3px;
-  border-color: #A4D3EE	;
-  width: 40px;
-}*/
+
 .text_input_box {
   height: 100px;
   width: 500px;
@@ -62,23 +57,15 @@ box interact
   border-color: #A4D3EE;
 }
 .text_points {
-/*	margin: auto;
-	border-style: solid;
-  border-width: 3px;
-  border-color: #A4D3EE;*/
   text-decoration:underline
-  /*text-shadow: 0 0 2px #fff;*/
-
 }
 .text_points_box {
 	width: 500px;
 }
 </style>
 <script type="text/javascript">
-	// var text_content = ["first","Second","Third"]
 	var counter = 1
 	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-	// $(".text_input_box").html(text_content[counter])
 	$(".text_input_box").html(text_points_html)
 	$("#text_interact_box").hide()
 
@@ -87,7 +74,6 @@ box interact
 		if (action_square_id == "Next"){
 			counter +=1
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-			// $(".text_input_box").html(text_content[counter]);
 			$(".text_input_box").html(text_points_html)
 			$("#text_counter").html(counter + 1 +" ");
 			return true
@@ -95,7 +81,6 @@ box interact
 		if (action_square_id == "Prev"){
 			counter -=1
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-			// $(".text_input_box").html(text_content[counter]);
 			$(".text_input_box").html(text_points_html)
 			$("#text_counter").html(counter + 1 +" ");
 			return true
