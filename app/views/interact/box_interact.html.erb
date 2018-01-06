@@ -12,17 +12,24 @@ box interact
 	<div>
 		<textarea class="text_input_box"> </textarea>
 	</div>
-	<div class="save_square"> Save</div>
+	<div><button class="save_square"> Append</button></div>
 	<% action_categories.each do |action| %>
 		<span class="action_square" id="<%=action%>"><%= action %></span>
 	<% end %>
 </div>
 <div id ="text_interact_box">
 	<textarea class="text_action_input"></textarea>
-	<div class="interact_square"> Interact</div>
+	<div><button class="interact_square"> Interact</button></div>
+</div>
+<div>
+	<button class="generate_file">Generate File</button>
 </div>
 
+
 <style type="text/css">
+.generate_file {
+	margin-top: 20px;
+}
 .square {
 }
 .action_square {
@@ -30,12 +37,15 @@ box interact
   border-width: 3px;
   border-color: #FFA500	;
 }
-.interact_square {
+.save_square {
+	margin-bottom: 5px;
+}
+/*.interact_square {
 	border-style: solid;
   border-width: 3px;
   border-color: #A4D3EE	;
   width: 40px;
-}
+}*/
 .text_input_box {
   height: 100px;
   width: 500px;
@@ -105,19 +115,19 @@ box interact
 		$(".text_input_box").append("\n" + interact_html);
 		$(".text_action_input").val(' ')
 	})
-</script>
+	$(".save_square").click(function(){
+		var text_input_box = $(".text_input_box").val();
+		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html(text_input_box);
+	});
 
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-		var counter = 0;
-    $("#interact").click(function(){
-    	var first_variable = "#first"
-    	var html_first = $(first_variable).html()
-    	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-    	$(".square").html(text_points_html)
-    	counter += 1;
-        // alert("The paragraph was clicked.")
-    });
-  });
+	$(".generate_file").click(function(){
+			var text = "";
+			$('div[class="text_points"]').each(function(index,item){
+				text += item.innerHTML + "\n"
+			})
+			var filename = "text_interact"
+			var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+			saveAs(blob, filename+".txt");
+		
+	});
 </script>
- -->

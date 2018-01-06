@@ -27,4 +27,7 @@ class InteractController < ApplicationController
 	def window3
 	end
 
+	def generate_text_file
+	end
+
 end

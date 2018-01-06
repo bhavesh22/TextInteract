@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post 'window2', to: 'interact#window2'
   post 'window3', to: 'interact#window3'
   post 'text_import_post', to: 'interact#text_import_post'
+  post 'generate_text_file', to: 'interact#generate_text_file'
 end
