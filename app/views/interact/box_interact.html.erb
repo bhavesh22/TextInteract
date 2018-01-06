@@ -1,0 +1,123 @@
+box interact
+<div class="text_points_box">
+<% @text_array.each do |text_point| %>
+	<div class="text_points"><%=text_point%></div>
+<% end %>
+</div>
+<div class="text_count">
+	<span id = "text_counter"> <%=  1 %> </span>/ <%= @text_array.length + 1 %>
+</div>
+<% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
+<div id ="frame_cover">
+	<div>
+		<textarea class="text_input_box"> </textarea>
+	</div>
+	<div class="save_square"> Save</div>
+	<% action_categories.each do |action| %>
+		<span class="action_square" id="<%=action%>"><%= action %></span>
+	<% end %>
+</div>
+<div id ="text_interact_box">
+	<textarea class="text_action_input"></textarea>
+	<div class="interact_square"> Interact</div>
+</div>
+
+<style type="text/css">
+.square {
+}
+.action_square {
+  border-style: solid;
+  border-width: 3px;
+  border-color: #FFA500	;
+}
+.interact_square {
+	border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE	;
+  width: 40px;
+}
+.text_input_box {
+  height: 100px;
+  width: 500px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE;
+}
+.text_action_input {
+	height: 70px;
+  width: 200px;
+  margin-top: 20px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE;
+}
+.text_points {
+/*	margin: auto;
+	border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE;*/
+  text-decoration:underline
+  /*text-shadow: 0 0 2px #fff;*/
+
+}
+.text_points_box {
+	width: 500px;
+}
+</style>
+<script type="text/javascript">
+	// var text_content = ["first","Second","Third"]
+	var counter = 1
+	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+	// $(".text_input_box").html(text_content[counter])
+	$(".text_input_box").html(text_points_html)
+	$("#text_interact_box").hide()
+
+	$(".action_square").click(function(){
+		var action_square_id = $(this).attr("id");
+		if (action_square_id == "Next"){
+			counter +=1
+			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+			// $(".text_input_box").html(text_content[counter]);
+			$(".text_input_box").html(text_points_html)
+			$("#text_counter").html(counter + 1 +" ");
+			return true
+		}
+		if (action_square_id == "Prev"){
+			counter -=1
+			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+			// $(".text_input_box").html(text_content[counter]);
+			$(".text_input_box").html(text_points_html)
+			$("#text_counter").html(counter + 1 +" ");
+			return true
+		}
+		$("#text_interact_box").show();
+		$(".text_action_input").val(action_square_id);
+	});
+
+
+	$("#action").click(function() {
+		$("#text_interact_box").show();
+		$(".text_action_input").html("Action");
+	})
+
+	$(".interact_square").click(function () {
+		var interact_html = $(".text_action_input").val();
+		$(".text_input_box").append("\n" + interact_html);
+		$(".text_action_input").val(' ')
+	})
+</script>
+
+<!-- <script type="text/javascript">
+	$(document).ready(function(){
+		var counter = 0;
+    $("#interact").click(function(){
+    	var first_variable = "#first"
+    	var html_first = $(first_variable).html()
+    	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+    	$(".square").html(text_points_html)
+    	counter += 1;
+        // alert("The paragraph was clicked.")
+    });
+  });
+</script>
+ -->

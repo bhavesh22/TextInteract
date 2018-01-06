@@ -1,0 +1,38 @@
+<%= form_tag(controller: "interact", action: "window2", method: "post") do %>
+	<%= text_area_tag :text_input ,"", class: "text_input" %>
+	<div><%= submit_tag("Submit") %></div>
+	<!-- <div class="text_input_box"> 
+		<textarea class="text_input"> At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+		</textarea>
+	</div> -->
+<% end %>
+
+<!-- <button id="import_text">To window 2</button> -->
+<!-- <div> 
+	Import file
+</div>
+<div> 
+	<%= form_tag(controller: "interact", action: "text_import_post", method: "post", multipart: true) do %>
+	  <%= label_tag(:q, "Search for:") %>
+	  <%= text_field_tag(:q) %>
+	  <%= file_field_tag 'picture' %>
+	  <%= submit_tag("Search") %>
+	<% end %>
+</div>
+ -->
+
+
+<style type="text/css">
+	.text_input {
+		width: 600px;
+		height: 400px;
+	}
+
+</style>
+
+<script type="text/javascript">
+	
+	$("#import_text").click(function function_name(argument) {
+		
+	});
+</script>

@@ -1,0 +1,51 @@
+<div id="div_1" class="text_points">
+	1- first
+</div>
+<div class="text_points">
+	2- Second
+</div>
+<div class="text_points">
+	3- Third
+</div>
+<div class="text_points">
+	4- Fourth
+</div>
+<div class="text_points">
+	5- Fifth
+</div>
+<div class="text_points">
+	6- Sixth
+</div>
+<div class="text_points">
+	7- Seventh
+</div>
+<button id= "interact">Interact</button>
+
+<div id ="frame_cover">
+	<div class="square">text here</div>
+</div>
+
+<style>
+.square {
+  height: 100px;
+  width: 500px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE;
+}
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var counter = 0;
+    $("#interact").click(function(){
+    	var first_variable = "#first"
+    	var html_first = $(first_variable).html()
+    	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+    	$(".square").html(text_points_html)
+    	counter += 1;
+        // alert("The paragraph was clicked.")
+    });
+  });
+</script>
+
