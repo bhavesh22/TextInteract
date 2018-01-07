@@ -1,30 +1,31 @@
-box interact
+Text Interactions !!
 <div class="text_points_box">
 <% @text_array.each do |text_point| %>
 	<div class="text_points"><%=text_point%></div>
 <% end %>
 </div>
-<div class="text_count">
-	<span id = "text_counter"> <%=  1 %> </span>/ <%= @text_array.length %>
-</div>
-<% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
-<div id ="frame_cover">
-	<div>
-		<textarea class="text_input_box"> </textarea>
+<div class="text_interaction_container"> 
+	<div class="text_count">
+		<span id = "text_counter"> <%=  1 %> </span>/ <%= @text_array.length %>
 	</div>
-	<div><button class="save_square"> Append</button></div>
-	<% action_categories.each do |action| %>
-		<span class="action_square" id="<%=action%>"><%= action %></span>
-	<% end %>
-</div>
-<div id ="text_interact_box">
-	<textarea class="text_action_input"></textarea>
-	<div><button class="interact_square"> Interact</button></div>
+	<% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
+	<div id ="frame_cover">
+		<div>
+			<textarea class="text_input_box"> </textarea>
+		</div>
+		<div><button class="save_square"> Append</button></div>
+		<% action_categories.each do |action| %>
+			<span class="action_square" id="<%=action%>"><%= action %></span>
+		<% end %>
+	</div>
+	<div id ="text_interact_box">
+		<textarea class="text_action_input"></textarea>
+		<div><button class="interact_square"> Interact</button></div>
+	</div>
 </div>
 <div>
 	<button class="generate_file">Generate File</button>
 </div>
-
 
 <style type="text/css">
 .generate_file {
@@ -58,9 +59,15 @@ box interact
 }
 .text_points {
   text-decoration:underline
+  color: black;
 }
 .text_points_box {
+	max-height: 350px;
 	width: 500px;
+  overflow: auto;
+}
+.text_interaction_container {
+	margin-top: 10px;
 }
 </style>
 <script type="text/javascript">
@@ -69,25 +76,28 @@ box interact
 	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 	$(".text_input_box").html(text_points_html)
 	$("#text_interact_box").hide()
-
 	$(".action_square").click(function(){
 		var action_square_id = $(this).attr("id");
 		if (action_square_id == "Next"){
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})
 			if (counter < max_counter) {
 				counter +=1;
 			}
 			else {
 				counter = 1;
 			}
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 			$(".text_input_box").val(text_points_html)
 			$("#text_counter").html(counter + " ");
 			return true
 		}
 		if (action_square_id == "Prev"){
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})			
 			if (counter > 1) {
 				counter -=1;
 			}
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})			
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 			$(".text_input_box").val(text_points_html)
 			$("#text_counter").html(counter+" ");
@@ -121,6 +131,5 @@ box interact
 			var filename = "text_interact"
 			var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
 			saveAs(blob, filename+".txt");
-		
 	});
 </script>
