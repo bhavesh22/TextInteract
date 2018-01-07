@@ -5,7 +5,7 @@ box interact
 <% end %>
 </div>
 <div class="text_count">
-	<span id = "text_counter"> <%=  1 %> </span>/ <%= @text_array.length + 1 %>
+	<span id = "text_counter"> <%=  1 %> </span>/ <%= @text_array.length %>
 </div>
 <% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
 <div id ="frame_cover">
@@ -65,6 +65,7 @@ box interact
 </style>
 <script type="text/javascript">
 	var counter = 1
+	var max_counter = parseInt($(".text_count").text().split("/")[1])
 	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 	$(".text_input_box").html(text_points_html)
 	$("#text_interact_box").hide()
@@ -72,17 +73,24 @@ box interact
 	$(".action_square").click(function(){
 		var action_square_id = $(this).attr("id");
 		if (action_square_id == "Next"){
-			counter +=1
+			if (counter < max_counter) {
+				counter +=1;
+			}
+			else {
+				counter = 1;
+			}
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-			$(".text_input_box").html(text_points_html)
-			$("#text_counter").html(counter + 1 +" ");
+			$(".text_input_box").val(text_points_html)
+			$("#text_counter").html(counter + " ");
 			return true
 		}
 		if (action_square_id == "Prev"){
-			counter -=1
+			if (counter > 1) {
+				counter -=1;
+			}
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-			$(".text_input_box").html(text_points_html)
-			$("#text_counter").html(counter + 1 +" ");
+			$(".text_input_box").val(text_points_html)
+			$("#text_counter").html(counter+" ");
 			return true
 		}
 		$("#text_interact_box").show();
