@@ -28,8 +28,24 @@
 <div>
 	<button class="generate_file">Generate File</button>
 </div>
+<div class="right_section">
+	<div> Recyling / Rough </div>
+	<textarea class="right_section_text_area"></textarea>
+</div>
 
 <style type="text/css">
+.right_section {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 500px;
+	height: 100%;
+}
+.right_section_text_area {
+	margin-top: 5px;
+	width: 95%;
+	height: 400px;
+}
 .title {
 
 }
@@ -116,15 +132,11 @@ hr {
 		$(".text_action_input").val(action_square_id);
 	});
 
-
-	$("#action").click(function() {
-		$("#text_interact_box").show();
-		$(".text_action_input").html("Action");
-	})
-
 	$(".interact_square").click(function () {
 		var interact_html = $(".text_action_input").val();
-		$(".text_input_box").append("\n" + interact_html);
+		var prev_value = $(".text_input_box").val()
+		$(".text_input_box").val(prev_value + "\n" + interact_html)
+		// $(".text_input_box").append("\n" + interact_html);
 		$(".text_action_input").val(' ')
 	})
 	$(".save_square").click(function(){

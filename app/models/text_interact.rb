@@ -4,7 +4,9 @@ class TextInteract < ApplicationRecord
 		splitted_array = text_array.split("\r\n")
 		splitted_array_numbered = []
 		splitted_array.each_with_index do |text_point, text_index|
-			splitted_array_numbered << (text_index+1).to_s + "- " + text_point
+			two_char  = text_point[0..2]
+			text_point_formated = two_char.gsub(/\d+-/,"") + text_point[3..-1]
+			splitted_array_numbered << (text_index+1).to_s + "- " + text_point_formated
 		end
 		return splitted_array_numbered
 	end
