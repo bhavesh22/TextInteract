@@ -1,9 +1,11 @@
-Text Interactions !!
+<div class="title" contentEditable> Text Interactions !!</div>
+<hr align="left">
 <div class="text_points_box">
 <% @text_array.each do |text_point| %>
-	<div class="text_points"><%=text_point%></div>
+	<div class="text_points" contentEditable><%=text_point%></div>
 <% end %>
 </div>
+<hr align="left">
 <div class="text_interaction_container"> 
 	<div class="text_count">
 		<span id = "text_counter"> <%=  1 %> </span>/ <%= @text_array.length %>
@@ -28,6 +30,12 @@ Text Interactions !!
 </div>
 
 <style type="text/css">
+.title {
+
+}
+hr {
+	width: 500px;
+}
 .generate_file {
 	margin-top: 20px;
 }
@@ -60,6 +68,7 @@ Text Interactions !!
 .text_points {
   text-decoration:underline
   color: black;
+  width: 90%;
 }
 .text_points_box {
 	max-height: 350px;
