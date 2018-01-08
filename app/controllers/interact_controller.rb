@@ -30,4 +30,7 @@ class InteractController < ApplicationController
 	def generate_text_file
 	end
 
+	def single_page
+	end
+
 end

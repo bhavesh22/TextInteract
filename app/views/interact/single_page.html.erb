@@ -1,0 +1,313 @@
+<div class="title" contentEditable> Text Interactions !</div>
+<div class="text_points_box">
+<% text_array = ["1- dummy point ", "2- dummy point"] %>
+<% text_array.each do |text_point| %>
+	<div class="text_points" contentEditable><%=text_point%></div>
+<% end %>
+</div>
+<!-- <hr align="left"> -->
+<div class="text_interaction_container"> 
+	<div class="text_count">
+		<span id = "text_counter"> <%=  1 %> </span>/ <%= text_array.length %>
+	</div>
+	<% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
+	<div id ="frame_cover">
+		<div>
+			<textarea class="text_input_box"> </textarea>
+		</div>
+		<div><button class="save_square gradient_button_brown"> Append</button></div>
+		<% action_categories.each do |action| %>
+			<button class="action_square gradient_button_blue" id="<%=action%>"><%= action %></button>
+		<% end %>
+	</div>
+	<div id ="text_interact_box">
+		<textarea class="text_action_input"></textarea>
+		<div><button class="interact_square gradient_button_blue"> Interact</button></div>
+	</div>
+</div>
+<div>
+	<button class="generate_file gradient_button_brown">Generate File</button>
+</div>
+<div class="right_section">
+	<div class="screen1"> 
+		<div class="title"> Insert Text </div>
+		<textarea class="right_section_text_area"></textarea>
+		<button class="screen1_button gradient_button_brown"> Format </button>
+	</div>
+	<div class="screen2" style="display: none"> 
+		<div class="title"> Formating </div>
+		<textarea class="right_section2_text_area"></textarea>
+		<button class="screen2_button gradient_button_brown"> Interact </button>
+		<button class="screen2_back_button gradient_button_brown"> Back </button>
+	</div>
+	<div class="screen3" style="display: none"> 
+		<div class="title"> Recyling / Rough </div>
+		<textarea class="right_section3_text_area"></textarea>
+		<button id="recycle_copy" class="gradient_button_brown">Copy</button> 
+		<button class="screen3_button gradient_button_brown"> Recycle </button>
+		<button class="screen3_back_button gradient_button_brown"> Back </button>
+	</div>
+</div>
+<!-- <div class="center_line"><hr width="1" size="500"></div> -->
+<div class="vertical-line"></div>
+
+<style type="text/css">
+.vertical-line { 
+	position: absolute;
+	left:50%;
+	top:5%;
+  width: 1px; 
+  margin-bottom: 10px;
+  background-color: brown;
+  height: 500px; 
+}
+.right_section {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 500px;
+	height: 100%;
+}
+.right_section_text_area {
+	margin-top: 5px;
+	width: 95%;
+	height: 400px;
+}
+.right_section2_text_area {
+	margin-top: 5px;
+	width: 95%;
+	height: 400px;
+}
+.right_section3_text_area {
+	margin-top: 5px;
+	width: 95%;
+	height: 400px;
+}
+.title {
+  font-family: font3;
+	font-size: 20px;
+	color: blue;
+}
+hr {
+	width: 500px;
+}
+.generate_file {
+	margin-top: 20px;
+}
+.square {
+}
+.action_square {
+  /*border-style: solid;
+  border-width: 3px;
+  border-color: #FFA500	;*/
+  background-color: blue;
+}
+.gradient_button_blue {
+border:1px solid #67bcd1; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 4px 10px 4px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #92cfde; background-image: -webkit-gradient(linear, left top, left bottom, from(#92cfde), to(#76bdd1));
+ background-image: -webkit-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: -moz-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: -ms-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: -o-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: linear-gradient(to bottom, #92cfde, #76bdd1);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92cfde, endColorstr=#76bdd1);
+}
+
+.gradient_button_blue:hover{
+ border:1px solid #44adc6;
+ background-color: #6bbed2; background-image: -webkit-gradient(linear, left top, left bottom, from(#6bbed2), to(#50abc4));
+ background-image: -webkit-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: -moz-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: -ms-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: -o-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: linear-gradient(to bottom, #6bbed2, #50abc4);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#6bbed2, endColorstr=#50abc4);
+}
+.gradient_button_brown {
+border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 4px 10px 4px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #d5cea6; background-image: -webkit-gradient(linear, left top, left bottom, from(#d5cea6), to(#b7ad70));
+ background-image: -webkit-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: -moz-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: -ms-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: -o-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: linear-gradient(to bottom, #d5cea6, #b7ad70);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d5cea6, endColorstr=#b7ad70);
+}
+
+.gradient_button_brown:hover{
+ border:1px solid #b4a861;
+ background-color: #c5bb83; background-image: -webkit-gradient(linear, left top, left bottom, from(#c5bb83), to(#a29752));
+ background-image: -webkit-linear-gradient(top, #c5bb83, #a29752);
+ background-image: -moz-linear-gradient(top, #c5bb83, #a29752);
+ background-image: -ms-linear-gradient(top, #c5bb83, #a29752);
+ background-image: -o-linear-gradient(top, #c5bb83, #a29752);
+ background-image: linear-gradient(to bottom, #c5bb83, #a29752);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#c5bb83, endColorstr=#a29752);
+}
+.save_square {
+	margin-bottom: 5px;
+}
+
+.text_input_box {
+  height: 100px;
+  width: 500px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE;
+}
+.text_action_input {
+	height: 70px;
+  width: 200px;
+  margin-top: 20px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #A4D3EE;
+}
+.text_points {
+  text-decoration:underline
+  color: black;
+  width: 90%;
+}
+.text_points_box {
+	max-height: 350px;
+	width: 500px;
+  overflow: auto;
+  border: 1px solid blue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+.text_interaction_container {
+	margin-top: 10px;
+}
+
+@font-face {
+  font-family: font1;
+  src: url("Kingthings_Calligraphica.ttf");
+}
+@font-face {
+  font-family: font2;
+  src: url("CATHSGBR.TTF");
+}
+@font-face {
+  font-family: font3;
+  src: url("brushstr.ttf");
+}
+</style>
+<script type="text/javascript">
+	var counter = 1
+	var max_counter = parseInt($(".text_count").text().split("/")[1])
+	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+	$(".text_input_box").html(text_points_html)
+	$("#text_interact_box").hide()
+	$(".action_square").click(function(){
+		var action_square_id = $(this).attr("id");
+		if (action_square_id == "Next"){
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})
+			if (counter < max_counter) {
+				counter +=1;
+			}
+			else {
+				counter = 1;
+			}
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})
+			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+			$(".text_input_box").val(text_points_html)
+			$("#text_counter").html(counter + " ");
+			return true
+		}
+		if (action_square_id == "Prev"){
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})			
+			if (counter > 1) {
+				counter -=1;
+			}
+			$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})			
+			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+			$(".text_input_box").val(text_points_html)
+			$("#text_counter").html(counter+" ");
+			return true
+		}
+		$("#text_interact_box").show();
+		$(".text_action_input").val(action_square_id);
+	});
+
+	$(".interact_square").click(function () {
+		var interact_html = $(".text_action_input").val();
+		var prev_value = $(".text_input_box").val()
+		$(".text_input_box").val(prev_value + "\n" + interact_html)
+		$(".text_action_input").val(' ')
+	})
+	$(".save_square").click(function(){
+		var text_input_box = $(".text_input_box").val();
+		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html(text_input_box);
+	});
+
+	$(".generate_file").click(function(){
+			var text = "";
+			$('div[class="text_points"]').each(function(index,item){
+				text += item.innerHTML + "\n"
+			})
+			var filename = "text_interact"
+			var blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+			saveAs(blob, filename+".txt");
+	});
+
+	$(".screen1_button").click(function(){
+		var screen1_text_array = $(".right_section_text_area").val().split("\n")
+		var screen1_text_array_numbered = []
+		var arrayLength = screen1_text_array.length;
+		for (var i = 0; i < arrayLength; i++) {
+    	screen1_text_array_numbered[i] = (i+1) +"- " + screen1_text_array[i];
+		}
+		screen2_text = ""
+		for (var i = 0; i < arrayLength; i++) {
+			screen2_text += screen1_text_array_numbered[i] + "\n"
+		}
+		$(".screen1").css({"display" : "none"});
+		$(".screen2").css({"display" : "block"});
+		$(".right_section2_text_area").val(screen2_text);
+	});
+
+	$(".screen2_button").click(function(){
+		$(".screen2").css({"display" : "none"})
+		$(".screen3").css({"display" : "block"})
+		var screen2_text = $(".right_section2_text_area").val();
+		var splitted_screen_text2_array = screen2_text.split("\n")
+		var looped_array_html = ""
+		var arrayLength = splitted_screen_text2_array.length;
+		for (var i = 0; i < arrayLength; i++) {
+    	looped_array_html += 	"<div class='text_points' contentEditable>"+splitted_screen_text2_array[i] + "</div>"
+		}
+		$(".text_points_box").html(looped_array_html);
+		max_counter = arrayLength;
+		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ " + max_counter
+		$(".text_count").html(max_counter_html);
+	});
+
+	$(".screen3_button").click(function(){
+		console.log("screen3 clicked")
+		var screen3_text = $(".right_section3_text_area").val();
+		var splitted_screen_text3_array = screen3_text.split("\n")
+		var looped_array_html = ""
+		var arrayLength = splitted_screen_text3_array.length;
+		for (var i = 0; i < arrayLength; i++) {
+    	looped_array_html += 	"<div class='text_points' contentEditable>"+splitted_screen_text3_array[i] + "</div>"
+		}
+		$(".text_points_box").html(looped_array_html);
+		max_counter = arrayLength;
+		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ " + max_counter
+		$(".text_count").html(max_counter_html);
+	});
+
+	$("#recycle_copy").click(function(){
+		var recycle_text = ""
+		$('div[class="text_points"]').each(function(index,item){
+			recycle_text += item.innerHTML + "\n"
+	});
+		$(".right_section3_text_area").val(recycle_text);
+	});
+	$(".screen2_back_button").click(function(){
+		$(".screen2").css({"display" : "none"})
+		$(".screen1").css({"display" : "block"})
+	});
+	$(".screen3_back_button").click(function(){
+		$(".screen3").css({"display" : "none"})
+		$(".screen2").css({"display" : "block"})
+	});
+</script>

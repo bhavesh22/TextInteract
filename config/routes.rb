@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'interact#text_import'
+  root 'interact#single_page'
   get 'text_import' ,to: 'interact#text_import'
+  get 'single_page', to: 'interact#single_page'
   post 'box_interact', to: 'interact#box_interact'
   post 'window2', to: 'interact#window2'
   post 'window3', to: 'interact#window3'
