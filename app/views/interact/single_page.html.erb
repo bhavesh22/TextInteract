@@ -8,7 +8,7 @@
 <!-- <hr align="left"> -->
 <div class="text_interaction_container"> 
 	<div class="text_count text_counter">
-		<span id = "text_counter"> <%=  1 %> </span>/ <span style="color: #c3b980"><%= text_array.length %></span>
+		<span id = "text_counter"> <%=  1 %> </span>/ <span id="max_counter" style="color: #c3b980"><%= text_array.length %></span>
 	</div>
 	<% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
 	<div id ="frame_cover">
@@ -16,7 +16,12 @@
 			<textarea class="text_input_box"> </textarea>
 		</div>
 		<div>
+			<div class="fair_title"> Fair </div>
+			<textarea class="text_input_fair_box"> </textarea>
+		</div>
+		<div>
 			<button class="save_square gradient_button_brown"> Append</button>
+			<button class="collapse_square gradient_button_brown"> Collapse </button>
 			<span class="character_count">0</span>
 		</div>
 		<% action_categories.each do |action| %>
@@ -44,18 +49,27 @@
 		<button class="screen2_back_button gradient_button_brown"> Back </button>
 	</div>
 	<div class="screen3" style="display: none"> 
-		<div class="title"> Recyling / Rough </div>
+		<div class="title"> Recyling </div>
 		<textarea class="right_section3_text_area"></textarea>
 		<button id="recycle_copy" class="gradient_button_brown">Copy</button> 
 		<button class="screen3_button gradient_button_brown"> Recycle </button>
 		<button class="screen3_back_button gradient_button_brown"> Back </button>
 		<button class="screen3_clear_button gradient_button_brown"> Clear </button>
 	</div>
+	<div class="title"> Rough </div>
+	<textarea class="right_section_rough_area"></textarea>
 </div>
 <div class="vertical-line"></div>
-
 <style type="text/css">
-
+.fair_title {
+	margin-top: 5px;
+	font-style: italic;
+}
+.text_input_fair_box {
+	width: 500px;
+  height: 50px;
+}
+    
 .character_count{
 	font-style: italic;
 	color: grey;
@@ -145,7 +159,7 @@ hr {
   width: 90%;
 }
 .text_points_box {
-	max-height: 350px;
+	max-height: 250px;
 	width: 500px;
   overflow: auto;
   border: 1px solid blue;
@@ -229,6 +243,11 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 	height: 100%;
 	position: absolute;
 }
+.right_section_rough_area {
+	width: 95%;
+	height: 130px;
+	margin-top: 10px;
+}
 
 </style>
 <script type="text/javascript">
@@ -239,33 +258,17 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 	$(".text_input_box").html(text_points_html)
 	$("#text_interact_box").hide()
+
 	$(".action_square").click(function(){
 		var action_square_id = $(this).attr("id");
 		if (action_square_id == "Next"){
-			$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})
-			if (counter < max_counter) {
-				counter +=1;
-			}
-			else {
-				counter = 1;
-			}
-			$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})
-			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-			$(".text_input_box").val(text_points_html)
-			$("#text_counter").html(counter + " ");
-			set_initial_text_length();
+			append_text();
+			next_point();
 			return true
 		}
 		if (action_square_id == "Prev"){
-			$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})			
-			if (counter > 1) {
-				counter -=1;
-			}
-			$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})			
-			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
-			$(".text_input_box").val(text_points_html)
-			$("#text_counter").html(counter+" ");
-			set_initial_text_length();
+			append_text();
+			prev_point();
 			return true
 		}
 		$("#text_interact_box").show();
@@ -278,9 +281,9 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		$(".text_input_box").val(prev_value + "\n" + interact_html)
 		$(".text_action_input").val(' ')
 	})
+
 	$(".save_square").click(function(){
-		var text_input_box = $(".text_input_box").val();
-		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html(text_input_box);
+		append_text();
 	});
 
 	$(".generate_file").click(function(){
@@ -321,12 +324,11 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		}
 		$(".text_points_box").html(looped_array_html);
 		max_counter = arrayLength;
-		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ " + max_counter
+		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ "+ "<span id='max_counter'>" +  max_counter + "</span>"
 		$(".text_count").html(max_counter_html);
 	});
 
 	$(".screen3_button").click(function(){
-		console.log("screen3 clicked")
 		var screen3_text = $(".right_section3_text_area").val();
 		var splitted_screen_text3_array = screen3_text.split("\n")
 		var looped_array_html = ""
@@ -336,7 +338,7 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		}
 		$(".text_points_box").html(looped_array_html);
 		max_counter = arrayLength;
-		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ " + max_counter
+		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ " + "<span id='max_counter'>" + max_counter+ "</span>"
 		$(".text_count").html(max_counter_html);
 		counter = 1;
 		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
@@ -351,20 +353,34 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 	});
 		$(".right_section3_text_area").val(recycle_text);
 	});
+
 	$(".screen2_back_button").click(function(){
 		$(".screen2").css({"display" : "none"})
 		$(".screen1").css({"display" : "block"})
 	});
+
 	$(".screen3_back_button").click(function(){
 		$(".screen3").css({"display" : "none"})
 		$(".screen2").css({"display" : "block"})
 	});
+
 	$(".screen3_clear_button").click(function(){
 		$(".right_section3_text_area").val("")
 	});
+
 	$('.text_input_box').keyup(function () {
 		set_text_difference();
 	});
+
+	$('.collapse_square').click(function(){
+		$(".text_points:nth-child(" + counter+  ")").remove();
+		next_point();
+		max_counter -=1;
+		counter -= 1;
+		console.log(max_counter);
+		$("#max_counter").html(max_counter);
+	});
+
 	function set_initial_text_length(){
   	initial_length = $(".text_points:nth-child(" + counter+  ")").html().replace(/\s/g, "").length
   	set_text_difference();
@@ -373,6 +389,47 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		var final_length = $(".text_input_box").val().replace(/\s/g, "").length;
 		var length_difference = final_length - initial_length;
 		$(".character_count").html(length_difference);
+	};
+	function append_text() {
+		var text_input_box = $(".text_input_box").val();
+		var text_input_fair_box = $(".text_input_fair_box").val();
+		var fair_text = " "
+		if (text_input_fair_box == " ") {
+			fair_text = ""
+		}
+		else {
+			fair_text = "\n" + "Fair" +"\n" + text_input_fair_box
+		}
+		var text_concated = text_input_box + fair_text
+		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html(text_concated);
+
+	};
+	function next_point() {
+		$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})
+		if (counter < max_counter) {
+			counter +=1;
+		}
+		else {
+			counter = 1;
+		}
+		$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})
+		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+		$(".text_input_box").val(text_points_html)
+		$("#text_counter").html(counter + " ");
+		$(".text_input_fair_box").val(" ")
+		set_initial_text_length();
+	};
+	function prev_point(){
+		$(".text_points:nth-child(" + counter+  ")").css({"color": "black", "font-weight": "normal"})			
+		if (counter > 1) {
+			counter -=1;
+		}
+		$(".text_points:nth-child(" + counter+  ")").css({"color": "blue", "font-weight": "bold"})	
+		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+		$(".text_input_box").val(text_points_html)
+		$("#text_counter").html(counter+" ");
+		$(".text_input_fair_box").val(" ")
+		set_initial_text_length();
 	};
 </script>
 
