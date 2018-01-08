@@ -37,23 +37,25 @@
 	<button class="generate_file gradient_button_brown">Generate File</button>
 </div>
 <div class="right_section">
-	<div class="screen1"> 
+	<div class="screen1" style="display: none"> 
 		<div class="title"> Insert Text </div>
 		<textarea class="right_section_text_area"></textarea>
-		<button class="screen1_button gradient_button_brown"> Format </button>
+		<button class="format_button gradient_button_brown"> Format </button>
 	</div>
-	<div class="screen2" style="display: none"> 
-		<div class="title"> Formating </div>
+	<div class="screen2"> 
+		<div class="title"> Insert Text  </div>
 		<textarea class="right_section2_text_area"></textarea>
+		<button class="format_button gradient_button_brown"> Format </button>
 		<button class="screen2_button gradient_button_brown"> Interact </button>
-		<button class="screen2_back_button gradient_button_brown"> Back </button>
+		<!-- <button class="screen2_back_button gradient_button_brown"> Back </button> -->
 	</div>
 	<div class="screen3" style="display: none"> 
 		<div class="title"> Recyling </div>
 		<textarea class="right_section3_text_area"></textarea>
 		<button id="recycle_copy" class="gradient_button_brown">Copy</button> 
+		<button class="format_button_2 gradient_button_brown"> Format </button>
 		<button class="screen3_button gradient_button_brown"> Recycle </button>
-		<button class="screen3_back_button gradient_button_brown"> Back </button>
+		<!-- <button class="screen3_back_button gradient_button_brown"> Back </button> -->
 		<button class="screen3_clear_button gradient_button_brown"> Clear </button>
 	</div>
 	<div class="title"> Rough </div>
@@ -121,9 +123,6 @@ hr {
 .square {
 }
 .action_square {
-  /*border-style: solid;
-  border-width: 3px;
-  border-color: #FFA500	;*/
   background-color: blue;
 }
 .text_count {
@@ -296,22 +295,35 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 			saveAs(blob, filename+".txt");
 	});
 
-	$(".screen1_button").click(function(){
-		var screen1_text_array = $(".right_section_text_area").val().split("\n")
+	$(".format_button").click(function(){
+		formatting("right_section2_text_area");
+	});
+
+	$(".format_button_2").click(function(){
+		formatting("right_section3_text_area");
+	});
+
+	function formatting (class_name){
+		var screen1_text_array = $("." + class_name).val().split("\n")
 		var screen1_text_array_numbered = []
 		var arrayLength = screen1_text_array.length;
 		for (var i = 0; i < arrayLength; i++) {
-    	screen1_text_array_numbered[i] = (i+1) +"- " + screen1_text_array[i];
+			var regex = /\d+-/
+			var text_point_formated = screen1_text_array[i].slice(0,3).replace(regex,"") + screen1_text_array[i].slice(3,)
+    	screen1_text_array_numbered[i] = (i+1) +"-" + text_point_formated;
 		}
 		screen2_text = ""
 		for (var i = 0; i < arrayLength; i++) {
-			screen2_text += screen1_text_array_numbered[i] + "\n"
+			if (i !=arrayLength-1) {
+				screen2_text += screen1_text_array_numbered[i] + "\n"
+			}
+			else {
+				screen2_text += screen1_text_array_numbered[i]
+			}
 		}
-		$(".screen1").css({"display" : "none"});
-		$(".screen2").css({"display" : "block"});
-		$(".right_section2_text_area").val(screen2_text);
-	});
-
+		// screen2_text -= "\n"
+		$("." + class_name).val(screen2_text);
+	}
 	$(".screen2_button").click(function(){
 		$(".screen2").css({"display" : "none"})
 		$(".screen3").css({"display" : "block"})
