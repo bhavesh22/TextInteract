@@ -7,15 +7,18 @@
 </div>
 <!-- <hr align="left"> -->
 <div class="text_interaction_container"> 
-	<div class="text_count">
-		<span id = "text_counter"> <%=  1 %> </span>/ <%= text_array.length %>
+	<div class="text_count text_counter">
+		<span id = "text_counter"> <%=  1 %> </span>/ <span style="color: #c3b980"><%= text_array.length %></span>
 	</div>
 	<% action_categories = ["Action", "Practise", "Extras","Prev","Next"]%>
 	<div id ="frame_cover">
 		<div>
 			<textarea class="text_input_box"> </textarea>
 		</div>
-		<div><button class="save_square gradient_button_brown"> Append</button></div>
+		<div>
+			<button class="save_square gradient_button_brown"> Append</button>
+			<span class="character_count">0</span>
+		</div>
 		<% action_categories.each do |action| %>
 			<button class="action_square gradient_button_blue" id="<%=action%>"><%= action %></button>
 		<% end %>
@@ -46,12 +49,19 @@
 		<button id="recycle_copy" class="gradient_button_brown">Copy</button> 
 		<button class="screen3_button gradient_button_brown"> Recycle </button>
 		<button class="screen3_back_button gradient_button_brown"> Back </button>
+		<button class="screen3_clear_button gradient_button_brown"> Clear </button>
 	</div>
 </div>
-<!-- <div class="center_line"><hr width="1" size="500"></div> -->
 <div class="vertical-line"></div>
 
 <style type="text/css">
+
+.character_count{
+	font-style: italic;
+	color: grey;
+	margin-left: 20px; 
+}
+
 .vertical-line { 
 	position: absolute;
 	left:50%;
@@ -102,45 +112,15 @@ hr {
   border-color: #FFA500	;*/
   background-color: blue;
 }
-.gradient_button_blue {
-border:1px solid #67bcd1; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 4px 10px 4px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
- background-color: #92cfde; background-image: -webkit-gradient(linear, left top, left bottom, from(#92cfde), to(#76bdd1));
- background-image: -webkit-linear-gradient(top, #92cfde, #76bdd1);
- background-image: -moz-linear-gradient(top, #92cfde, #76bdd1);
- background-image: -ms-linear-gradient(top, #92cfde, #76bdd1);
- background-image: -o-linear-gradient(top, #92cfde, #76bdd1);
- background-image: linear-gradient(to bottom, #92cfde, #76bdd1);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92cfde, endColorstr=#76bdd1);
+.text_count {
+	margin-bottom: 5px;
 }
+.text_counter {
+ 	font-family: font3;
+  color: blue;
+ }  
 
-.gradient_button_blue:hover{
- border:1px solid #44adc6;
- background-color: #6bbed2; background-image: -webkit-gradient(linear, left top, left bottom, from(#6bbed2), to(#50abc4));
- background-image: -webkit-linear-gradient(top, #6bbed2, #50abc4);
- background-image: -moz-linear-gradient(top, #6bbed2, #50abc4);
- background-image: -ms-linear-gradient(top, #6bbed2, #50abc4);
- background-image: -o-linear-gradient(top, #6bbed2, #50abc4);
- background-image: linear-gradient(to bottom, #6bbed2, #50abc4);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#6bbed2, endColorstr=#50abc4);
-}
-.gradient_button_brown {
-border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 4px 10px 4px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
- background-color: #d5cea6; background-image: -webkit-gradient(linear, left top, left bottom, from(#d5cea6), to(#b7ad70));
- background-image: -webkit-linear-gradient(top, #d5cea6, #b7ad70);
- background-image: -moz-linear-gradient(top, #d5cea6, #b7ad70);
- background-image: -ms-linear-gradient(top, #d5cea6, #b7ad70);
- background-image: -o-linear-gradient(top, #d5cea6, #b7ad70);
- background-image: linear-gradient(to bottom, #d5cea6, #b7ad70);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d5cea6, endColorstr=#b7ad70);
-}
-
-.gradient_button_brown:hover{
- border:1px solid #b4a861;
- background-color: #c5bb83; background-image: -webkit-gradient(linear, left top, left bottom, from(#c5bb83), to(#a29752));
- background-image: -webkit-linear-gradient(top, #c5bb83, #a29752);
- background-image: -moz-linear-gradient(top, #c5bb83, #a29752);
- background-image: -ms-linear-gradient(top, #c5bb83, #a29752);
- background-image: -o-linear-gradient(top, #c5bb83, #a29752);
- background-image: linear-gradient(to bottom, #c5bb83, #a29752);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#c5bb83, endColorstr=#a29752);
-}
-.save_square {
+ .save_square {
 	margin-bottom: 5px;
 }
 
@@ -189,10 +169,73 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
   font-family: font3;
   src: url("brushstr.ttf");
 }
+
+.gradient_button_blue {
+border:1px solid #67bcd1; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 4px 10px 4px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #92cfde; background-image: -webkit-gradient(linear, left top, left bottom, from(#92cfde), to(#76bdd1));
+ background-image: -webkit-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: -moz-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: -ms-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: -o-linear-gradient(top, #92cfde, #76bdd1);
+ background-image: linear-gradient(to bottom, #92cfde, #76bdd1);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#92cfde, endColorstr=#76bdd1);
+}
+
+.gradient_button_blue:hover{
+ border:1px solid #44adc6;
+ background-color: #6bbed2; background-image: -webkit-gradient(linear, left top, left bottom, from(#6bbed2), to(#50abc4));
+ background-image: -webkit-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: -moz-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: -ms-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: -o-linear-gradient(top, #6bbed2, #50abc4);
+ background-image: linear-gradient(to bottom, #6bbed2, #50abc4);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#6bbed2, endColorstr=#50abc4);
+}
+.gradient_button_brown {
+border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;border-radius: 3px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 4px 10px 4px 10px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(0,0,0,0.3);font-weight:bold; color: #FFFFFF;
+ background-color: #d5cea6; background-image: -webkit-gradient(linear, left top, left bottom, from(#d5cea6), to(#b7ad70));
+ background-image: -webkit-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: -moz-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: -ms-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: -o-linear-gradient(top, #d5cea6, #b7ad70);
+ background-image: linear-gradient(to bottom, #d5cea6, #b7ad70);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#d5cea6, endColorstr=#b7ad70);
+}
+
+.gradient_button_brown:hover{
+ border:1px solid #b4a861;
+ background-color: #c5bb83; background-image: -webkit-gradient(linear, left top, left bottom, from(#c5bb83), to(#a29752));
+ background-image: -webkit-linear-gradient(top, #c5bb83, #a29752);
+ background-image: -moz-linear-gradient(top, #c5bb83, #a29752);
+ background-image: -ms-linear-gradient(top, #c5bb83, #a29752);
+ background-image: -o-linear-gradient(top, #c5bb83, #a29752);
+ background-image: linear-gradient(to bottom, #c5bb83, #a29752);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#c5bb83, endColorstr=#a29752);
+}
+
+.paper {
+    padding: 37px 55px 27px;
+    position: absolute;
+    border: 1px solid #B5B5B5;
+    background: white;
+    background: -webkit-linear-gradient(top, #DFE8EC 0%, white 8%) 0 57px;
+    background: -moz-linear-gradient(top, #DFE8EC 0%, white 8%) 0 57px;
+    background: linear-gradient(top, #DFE8EC 0%, white 8%) 0 57px;
+    -webkit-background-size: 100% 30px;
+    -moz-background-size: 100% 30px;
+    -ms-background-size: 100% 30px;
+    background-size: 100% 30px;
+}
+.paper::before {content:""; z-index:-1; margin:0 1px; width:706px; height:10px; position:absolute; bottom:-3px; left:0; background:white; border:1px solid #B5B5B5;}
+.paper::after {content:''; position:absolute; width:0px; top:0; left:39px; bottom:0; border-left:1px solid #F8D3D3;}
+.paper_class {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
 </style>
 <script type="text/javascript">
 	var counter = 1
 	var max_counter = parseInt($(".text_count").text().split("/")[1])
+	var initial_length = 1;
+	// set_initial_text_length();
 	var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 	$(".text_input_box").html(text_points_html)
 	$("#text_interact_box").hide()
@@ -210,6 +253,7 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 			$(".text_input_box").val(text_points_html)
 			$("#text_counter").html(counter + " ");
+			set_initial_text_length();
 			return true
 		}
 		if (action_square_id == "Prev"){
@@ -221,6 +265,7 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 			var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
 			$(".text_input_box").val(text_points_html)
 			$("#text_counter").html(counter+" ");
+			set_initial_text_length();
 			return true
 		}
 		$("#text_interact_box").show();
@@ -293,6 +338,10 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		max_counter = arrayLength;
 		max_counter_html = "<span id = 'text_counter'>" + 1 + " </span>/ " + max_counter
 		$(".text_count").html(max_counter_html);
+		counter = 1;
+		var text_points_html = $(".text_points:nth-child(" + counter+  ")").html()
+		$(".text_input_box").val(text_points_html)
+		$("#text_counter").html(counter + " ");
 	});
 
 	$("#recycle_copy").click(function(){
@@ -310,4 +359,20 @@ border:1px solid #c3b980; -webkit-border-radius: 3px; -moz-border-radius: 3px;bo
 		$(".screen3").css({"display" : "none"})
 		$(".screen2").css({"display" : "block"})
 	});
+	$(".screen3_clear_button").click(function(){
+		$(".right_section3_text_area").val("")
+	});
+	$('.text_input_box').keyup(function () {
+		set_text_difference();
+	});
+	function set_initial_text_length(){
+  	initial_length = $(".text_points:nth-child(" + counter+  ")").html().replace(/\s/g, "").length
+  	set_text_difference();
+	};
+	function set_text_difference(){
+		var final_length = $(".text_input_box").val().replace(/\s/g, "").length;
+		var length_difference = final_length - initial_length;
+		$(".character_count").html(length_difference);
+	};
 </script>
+
